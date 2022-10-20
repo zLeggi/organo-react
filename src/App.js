@@ -4,14 +4,17 @@ import Form from "./components/Form";
 import Team from "./components/Team";
 
 function App() {
-  const [employees, setEmployees] = useState([]);
+  
 
-  const whenNewAddEmployee = (employee) => {
-    console.log(employee);
-    setEmployees([...employee, employee]);
-  };
+  
 
   const teams = [
+    {
+      name: "",
+      primaryColor: "#000000",
+      secundaryColor: "#CCCCCC"
+    },
+    
     {
       name: "Programação",
       primaryColor: "#57C278",
@@ -51,11 +54,20 @@ function App() {
     },
   ];
 
+  const [employees, setEmployees] = useState([]);
+
+
+  const whenNewAddEmployee = (employee) => {
+    console.log(employee);
+    setEmployees([...employees, employee]);
+  };
+
   return (
     <div className="App">
       <Banner />
-      <Form
-        whenToRegisterEmployee={(employee) => whenNewAddEmployee(employees)}
+      <Form 
+        teams={teams.map(teams => teams.name)}
+        whenToRegisterEmployee={employee => whenNewAddEmployee(employee)}
       />
       <Team name="Programação" />
       <Team name="Front End" />

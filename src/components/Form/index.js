@@ -5,17 +5,7 @@ import DropDown from "../DropDown";
 import "./Form.css";
 
 const Form = (props) => {
-  const times = [
-    "",
-    "Programação",
-    "Front-End",
-    "Data Science",
-    "DevOps",
-    "UX e Design",
-    "Mobile",
-    "Inovação e Gestão",
-  ];
-
+ 
   const [name, setName] = useState("");
   const [office, setOffice] = useState("");
   const [image, setImage] = useState("");
@@ -58,7 +48,7 @@ const Form = (props) => {
         />
 
         <DropDown
-          itens={times}
+          itens={props.teams}
           label="Time"
           value={team}
           whenChanged={(variableValue) => setTeam(variableValue)}
