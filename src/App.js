@@ -1,81 +1,69 @@
-import { useState } from "react";
-import Banner from "./components/Banner";
-import Form from "./components/Form";
-import Team from "./components/Team";
+import { useState } from 'react';
+import Banner from './componentes/Banner';
+import Formulario from './componentes/Formulario';
+import Time from './componentes/Time';
+
 
 function App() {
-  
 
-  
+  const times = [
+    {
+      nome: 'Programação',
+      corPrimaria: '#57C278',
+      corSecundaria: '#D9F7E9'
+    },
+    {
+      nome: 'Front-End',
+      corPrimaria: '#82CFFA',
+      corSecundaria: '#E8F8FF'
+    },
+    {
+      nome: 'Data Science',
+      corPrimaria: '#A6D157',
+      corSecundaria: '#F0F8E2'
+    },
+    {
+      nome: 'Devops',
+      corPrimaria: '#E06B69',
+      corSecundaria: '#FDE7E8'
+    },
+    {
+      nome: 'UX e Design',
+      corPrimaria: '#DB6EBF',
+      corSecundaria: '#FAE9F5'
+    },
+    {
+      nome: 'Mobile',
+      corPrimaria: '#FFBA05',
+      corSecundaria: '#FFF5D9'
+    },
+    {
+      nome: 'Inovação e Gestão',
+      corPrimaria: '#FF8A29',
+      corSecundaria: '#FFEEDF'
+    }
+  ]
 
-  const teams = [
-    {
-      name: "",
-      primaryColor: "#000000",
-      secundaryColor: "#CCCCCC"
-    },
-    
-    {
-      name: "Programação",
-      primaryColor: "#57C278",
-      secundaryColor: "#D9F7E9",
-    },
+  const [colaboradores, setColaboradores] = useState([])
 
-    {
-      name: "Front-End",
-      primaryColor: "#82CFFA'",
-      secundaryColor: "#E8F8FF",
-    },
-    {
-      name: "Data Science",
-      primaryColor: "#A6D157",
-      secundaryColor: "#F0F8E2",
-    },
-    {
-      name: "DevOps",
-      primaryColor: "#E06B69",
-      secundaryColor: "#FDE7E8",
-    },
-    {
-      name: "UX e Design",
-      primaryColor: "#D86EBF",
-      secundaryColor: "#FAE5F5",
-    },
-
-    {
-      name: "Mobile",
-      primaryColor: "#FEBA05",
-      secundaryColor: "#FFF5D9",
-    },
-    {
-      name: "Inovação e Gestão",
-      primaryColor: "#FF8A29",
-      secundaryColor: "#FFEEDF",
-    },
-  ];
-
-  const [employees, setEmployees] = useState([]);
-
-
-  const whenNewAddEmployee = (employee) => {
-    console.log(employee);
-    setEmployees([...employees, employee]);
-  };
+  const aoNovoColaboradorAdicionado = (colaborador) => {
+    debugger
+    setColaboradores([...colaboradores, colaborador])
+  }
 
   return (
-    <div className="App">
-      <Banner />
-      <Form 
-        teams={teams.map(teams => teams.name)}
-        whenToRegisterEmployee={employee => whenNewAddEmployee(employee)}
-      />
-      <Team name="Programação" />
-      <Team name="Front End" />
-      <Team name="Data Science" />
-      <Team name="DevOps" />
-      <Team name="UX & Design" />
-      <Team name="Mobile" />
-      <Team name="Inovação e Gestão" />
+    <div className="App">  
+      <Banner />     
+      <Formulario times={times.map(time => time.nome)} aoColaboradorCadastrado={colaborador => aoNovoColaboradorAdicionado(colaborador)}/>
+
+      {times.map(time => <Time 
+        key={time.nome} 
+        nome={time.nome} 
+        corPrimaria={time.corPrimaria} 
+        corSecundaria={time.corSecundaria} 
+        colaboradores={colaboradores.filter(colaborador => colaborador.time === time.nome)}
+      />)}   
+
     </div>
   );
 }
